@@ -1,8 +1,8 @@
 import styles from "./ListContainer.module.css"
 import Button from "./components/Button"
+import ListItemLayout from "./components/ListItemLayout"
 import ListItem from "./components/ListItem"
 import { useState } from "react"
-import ListItemLayout from "./components/ListItemLayout"
 
 export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
@@ -36,7 +36,18 @@ export default function ListContainer() {
         </div>
       </ListItemLayout>
       <div className={styles.container}>
-        <ListItem />
+        <ListItem
+          badges={[
+            {
+              color: "red",
+              title: "Bug",
+            },
+            {
+              color: "blue",
+              title: "New",
+            },
+          ]}
+        />
       </div>
     </div>
   )
