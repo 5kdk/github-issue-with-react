@@ -1,7 +1,6 @@
-.tabList{
+.tabList {
   display: flex;
 }
-
 
 .tab {
   display: flex;
@@ -13,7 +12,7 @@
   margin-right: 10px;
 }
 
-.selected{
+.selected {
   border-bottom: #fa4549 2px solid;
   font-weight: 700;
 }

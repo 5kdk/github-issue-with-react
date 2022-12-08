@@ -2,7 +2,10 @@
   box-sizing: border-box;
 }
 
-ul, li {
+ul,
+li {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -13,16 +16,4 @@ ul, li {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.7);
   align-items: center;
-}
-
-.listContainer {
-  padding: 0 32px;
-  margin-top: 24px;
-  height: 220px;
-}
-
-.footer {
-  margin: 40px;
-  padding: 40px 16px 8px;
-  border-top: 1px solid #d0d7de;
 }

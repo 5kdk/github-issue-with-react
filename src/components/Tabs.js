@@ -6,11 +6,11 @@ const tabList = [
   "Code",
   "Issue",
   "Pull request",
-  // "Actions",
-  // "Projects",
-  // "Security",
-  // "Insight",
-  // "Settings",
+  "Actions",
+  "Projects",
+  "Security",
+  "Insight",
+  "Settings",
 ]
 
 export default function Tabs() {
@@ -20,7 +20,7 @@ export default function Tabs() {
     <ul className={styles.tabList}>
       {tabList.map((tab, idx) => (
         <Tab
-          key = {`${idx}`}
+          key={`${idx}`}
           title={tab}
           selected={selectedTabIdx === idx}
           onClick={() => setSelectedTabIdx(idx)}
