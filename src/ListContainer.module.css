@@ -7,6 +7,7 @@
 .topSection {
   display: flex;
   flex-direction: "space-between";
+  margin-bottom: 20px;
 }
 
 .listFilter {
@@ -36,4 +37,13 @@
 .filterLists > span {
   padding: 0 16px;
   line-height: 21px;
+}
+
+.textFilter{
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: 800;
 }
