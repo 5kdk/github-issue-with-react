@@ -1,6 +1,6 @@
-import styles from "./ListItem.module.css"
 import ListItemLayout from "./ListItemLayout"
 import Badge from "./Badge"
+import styles from "./ListItem.module.css"
 
 export default function ListItem({
   checked,

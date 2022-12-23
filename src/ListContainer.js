@@ -10,6 +10,7 @@ import styles from "./ListContainer.module.css"
 
 export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
+  const [list, setList] = useState([])
 
   return (
     <div className={styles.listContainer}>
@@ -31,27 +32,36 @@ export default function ListContainer() {
       </div>
       <OpenClosedFilters />
       <ListItemLayout className={styles.listFilter}>
-        <ListFilter />
+        <ListFilter
+          onChangeFilter={(filteredData) => {
+            // 필터링된 요소에 맞게 데이터를 불러오기
+            // const data = getData('필터링 된 정보')
+            // setList(data)
+          }}
+        />
       </ListItemLayout>
       <div className={styles.container}>
-        <ListItem
-          badges={[
-            {
-              color: "red",
-              title: "Bug",
-            },
-            {
-              color: "blue",
-              title: "New",
-            },
-          ]}
-        />
+        {list.map((listItem, index) => (
+          <ListItem
+            key={index}
+            badges={[
+              {
+                color: "red",
+                title: "Bug",
+              },
+              {
+                color: "blue",
+                title: "New",
+              },
+            ]}
+          />
+        ))}
       </div>
     </div>
   )
 }
 
-function ListFilter() {
+function ListFilter({ onChangeFilter}) {
   const [showModal, setShowModal] = useState(false)
 
   return (
@@ -70,6 +80,11 @@ function ListFilter() {
         opened={showModal}
         onClose={() => setShowModal(false)}
         placeholder="Filter lables"
+        searchDataList={['bug', 'labels', 'new', 'apple']}
+        onClickCell={() => {
+          // 클릭된 정보를 통해 리스트 필터링
+          onChangeFilter()
+        }}
       />
     </>
   )
