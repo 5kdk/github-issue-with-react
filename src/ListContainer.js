@@ -57,14 +57,20 @@ function ListFilter() {
   return (
     <>
       <div className={styles.filterLists}>
-        <ListFilterItem onClick={() => setShowModal(true)}>Author</ListFilterItem>
+        <ListFilterItem onClick={() => setShowModal(true)}>
+          Author
+        </ListFilterItem>
         <ListFilterItem>Label</ListFilterItem>
         <ListFilterItem>Projects</ListFilterItem>
         <ListFilterItem>Milestones</ListFilterItem>
         <ListFilterItem>Assignee</ListFilterItem>
         <ListFilterItem>Sort</ListFilterItem>
       </div>
-      <Modal opened={showModal} onClose={() => setShowModal(false)} />
+      <Modal
+        opened={showModal}
+        onClose={() => setShowModal(false)}
+        placeholder="Filter lables"
+      />
     </>
   )
 }
