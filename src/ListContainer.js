@@ -61,40 +61,39 @@ export default function ListContainer() {
   )
 }
 
-function ListFilter({ onChangeFilter}) {
-  const [showModal, setShowModal] = useState(false)
-
+function ListFilter() {
   return (
-    <>
-      <div className={styles.filterLists}>
-        <ListFilterItem onClick={() => setShowModal(true)}>
-          Author
-        </ListFilterItem>
-        <ListFilterItem>Label</ListFilterItem>
-        <ListFilterItem>Projects</ListFilterItem>
-        <ListFilterItem>Milestones</ListFilterItem>
-        <ListFilterItem>Assignee</ListFilterItem>
-        <ListFilterItem>Sort</ListFilterItem>
-      </div>
-      <Modal
-        opened={showModal}
-        onClose={() => setShowModal(false)}
-        placeholder="Filter lables"
-        searchDataList={['bug', 'labels', 'new', 'apple']}
-        onClickCell={() => {
-          // 클릭된 정보를 통해 리스트 필터링
-          onChangeFilter()
-        }}
-      />
-    </>
+    <div className={styles.filterLists}>
+      <ListFilterItem>Author</ListFilterItem>
+      <ListFilterItem>Label</ListFilterItem>
+      <ListFilterItem>Projects</ListFilterItem>
+      <ListFilterItem>Milestones</ListFilterItem>
+      <ListFilterItem>Assignee</ListFilterItem>
+      <ListFilterItem>Sort</ListFilterItem>
+    </div>
   )
 }
 
-function ListFilterItem({ onClick, children }) {
+function ListFilterItem({ children, onChangeFilter }) {
+  const [showModal, setShowModal] = useState(false)
   return (
-    <span role="button" onClick={onClick}>
-      {children} ▾
-    </span>
+    <div className={styles.filterItem}>
+      <span role="button" onClick={() => setShowModal(true)}>
+        {children} ▾
+      </span>
+      <div className={styles.modalContainer}>
+        <Modal
+          opened={showModal}
+          onClose={() => setShowModal(false)}
+          placeholder="Filter lables"
+          searchDataList={["bug", "labels", "new", "apple"]}
+          onClickCell={() => {
+            // 클릭된 정보를 통해 리스트 필터링
+            onChangeFilter()
+          }}
+        />
+      </div>
+    </div>
   )
 }
 
