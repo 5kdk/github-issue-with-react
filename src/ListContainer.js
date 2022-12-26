@@ -61,16 +61,6 @@ export default function ListContainer() {
             <ListItem
               key={item.id}
               data={item}
-              badges={[
-                {
-                  color: "red",
-                  title: "Bug",
-                },
-                {
-                  color: "blue",
-                  title: "New",
-                },
-              ]}
             />
           ))}
         </div>
