@@ -1,9 +1,11 @@
+import axios from "axios"
 import cx from "clsx"
+
 import Button from "./components/Button"
 import ListItem from "./components/ListItem"
 import ListFilter from "./components/ListFilter"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ListItemLayout from "./components/ListItemLayout"
 
 import styles from "./ListContainer.module.css"
@@ -13,6 +15,17 @@ export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
   const [list, setList] = useState([])
   const [page, setPage] = useState(1)
+
+  async function getData() {
+    const { data } = await axios.get(
+      `https://api.github.com/repos/facebook/react/issues`,
+    )
+    setList(data)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <>
@@ -44,9 +57,10 @@ export default function ListContainer() {
           />
         </ListItemLayout>
         <div className={styles.container}>
-          {list.map((listItem, index) => (
+          {list.map((item) => (
             <ListItem
-              key={index}
+              key={item.id}
+              data={item}
               badges={[
                 {
                   color: "red",
