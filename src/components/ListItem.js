@@ -6,13 +6,13 @@ import styles from "./ListItem.module.css"
 const relativeTime = require("dayjs/plugin/relativeTime")
 dayjs.extend(relativeTime)
 
-export default function ListItem({ onClickTitle, data }) {
+export default function ListItem({ onClickTitle, data, checked, onClickCheckBox }) {
   const badges = data.labels
   const state = data.state === "open" ? "opened" : "closed"
   const date = data.state === "open" ? data.created_at : data.closed_at
 
   return (
-    <ListItemLayout>
+    <ListItemLayout checked={checked} onClick={onClickCheckBox}>
       <div>
         <div role="button" onClick={onClickTitle} className={styles.title}>
           {data.title}
