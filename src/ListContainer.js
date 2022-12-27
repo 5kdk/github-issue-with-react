@@ -18,6 +18,7 @@ export default function ListContainer() {
   const [page, setPage] = useState(1)
   const [checked, setChecked] = useState(false)
   const [isOpenMode, setIsOpenMode] = useState(true)
+  const [params, setParams] = useState()
   const maxPage = 10
 
   async function getData(params) {
@@ -28,8 +29,8 @@ export default function ListContainer() {
   }
 
   useEffect(() => {
-    getData({ page, state: isOpenMode ? "open" : "closed" })
-  }, [page, isOpenMode])
+    getData({ page, state: isOpenMode ? "open" : "closed", ...params })
+  }, [page, isOpenMode, params])
 
   return (
     <>
@@ -56,10 +57,11 @@ export default function ListContainer() {
         />
         <ListItemLayout className={styles.listFilter}>
           <ListFilter
-            onChangeFilter={(filteredData) => {
+            onChangeFilter={(params) => {
               // 필터링된 요소에 맞게 데이터를 불러오기
               // const data = getData('필터링 된 정보')
               // setList(data)
+              setParams(params)
             }}
           />
         </ListItemLayout>

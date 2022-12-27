@@ -5,7 +5,7 @@ import Modal from "./Modal"
 import styles from "./ListFilter.module.css"
 import { GITHUB_API } from "../api"
 
-export default function ListFilter() {
+export default function ListFilter({ onChangeFilter }) {
   const [showModal, setShowModal] = useState()
   const [list, setList] = useState([])
   const filterList = [
@@ -59,6 +59,7 @@ export default function ListFilter() {
           onClick={() => setShowModal(filter)}
           onClose={() => setShowModal()}
           showModal={showModal === filter}
+          onChangeFilter={onChangeFilter}
         >
           {filter}
         </ListFilterItem>
@@ -73,14 +74,13 @@ function ListFilterItem({
   showModal,
   onClick,
   onClose,
-  searchDataList
+  searchDataList,
 }) {
   const [list, setList] = useState(searchDataList)
 
   useEffect(() => {
     setList(searchDataList)
   }, [searchDataList])
-  
 
   return (
     <div className={styles.filterItem}>
@@ -92,11 +92,11 @@ function ListFilterItem({
           title={children}
           opened={showModal}
           onClose={onClose}
-          placeholder="Filter lables"
+          placeholder="Filter labels"
           searchDataList={list}
-          onClickCell={() => {
+          onClickCell={(params) => {
             // 클릭된 정보를 통해 리스트 필터링
-            onChangeFilter()
+            onChangeFilter(params)
           }}
         />
       </div>
