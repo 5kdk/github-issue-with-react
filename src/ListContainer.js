@@ -18,19 +18,19 @@ export default function ListContainer() {
   const [list, setList] = useState([])
   const [page, setPage] = useState(1)
   const [checked, setChecked] = useState(false)
-
+  const [isOpenMode, setIsOpenMode] = useState(true)
   const maxPage = 10
 
-  async function getData(pageParam) {
+  async function getData(params) {
     const data = await axios.get(`${GIHUB_API}/repos/facebook/react/issues`, {
-      params: { page: pageParam },
+      params,
     })
     setList(data.data)
   }
 
   useEffect(() => {
-    getData(page)
-  }, [page])
+    getData({ page, state: isOpenMode ? "open" : "closed" })
+  }, [page, isOpenMode])
 
   return (
     <>
@@ -51,7 +51,10 @@ export default function ListContainer() {
             New Issue
           </Button>
         </div>
-        <OpenClosedFilters />
+        <OpenClosedFilters
+          isOpenMode={isOpenMode}
+          OnClickMode={setIsOpenMode}
+        />
         <ListItemLayout className={styles.listFilter}>
           <ListFilter
             onChangeFilter={(filteredData) => {
@@ -81,26 +84,25 @@ export default function ListContainer() {
   )
 }
 
-function OpenClosedFilters() {
-  const [isOpenMode, setIsOpenMode] = useState(true)
+function OpenClosedFilters({ isOpenMode, OnClickMode }) {
   // const data = getData()
   // const openedData = data.filter((d)=> d.state === 'open');
   // const closedData = data.filter((d)=> d.state === 'closed');
-  const openModeDataSize = 1
-  const closeModeDataSize = 2
+  // const openModeDataSize = 1
+  // const closeModeDataSize = 2
   return (
     <>
       <OpenClosedFilter
-        size={openModeDataSize}
+        // size={openModeDataSize}
         state="Opened"
         selected={isOpenMode}
-        onClick={() => setIsOpenMode(true)}
+        onClick={() => OnClickMode(true)}
       />
       <OpenClosedFilter
-        size={closeModeDataSize}
+        // size={closeModeDataSize}
         state="Closed"
         selected={!isOpenMode}
-        onClick={() => setIsOpenMode(false)}
+        onClick={() => OnClickMode(false)}
       />
     </>
   )
