@@ -1,17 +1,16 @@
+import { useState, useEffect } from "react"
 import axios from "axios"
 import cx from "clsx"
 
 import Button from "./components/Button"
 import ListItem from "./components/ListItem"
 import ListFilter from "./components/ListFilter"
-
-import { useState, useEffect } from "react"
 import ListItemLayout from "./components/ListItemLayout"
+import Pagenation from "./components/Pagenation"
+import { GITHUB_API } from "./api"
 
 import styles from "./ListContainer.module.css"
-import Pagenation from "./components/Pagenation"
 
-const GIHUB_API = "https://api.github.com"
 
 export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
@@ -22,7 +21,7 @@ export default function ListContainer() {
   const maxPage = 10
 
   async function getData(params) {
-    const data = await axios.get(`${GIHUB_API}/repos/facebook/react/issues`, {
+    const data = await axios.get(`${GITHUB_API}/repos/facebook/react/issues`, {
       params,
     })
     setList(data.data)

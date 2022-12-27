@@ -14,9 +14,13 @@ export default function Modal({
   const [filteredData, setFilteredData] = useState(searchDataList)
 
   useEffect(() => {
-    setFilteredData(searchDataList.filter((item) => item === searchValue))
-    // setFilteredData(['Apple'])
-  }, [searchDataList, searchValue])
+    setFilteredData(searchDataList)
+  }, [searchDataList])
+
+  // useEffect(() => {
+  //   setFilteredData(searchDataList.filter((item) => item === searchValue))
+  //   // setFilteredData(['Apple'])
+  // }, [searchDataList, searchValue])
 
   return (
     <div className={cx(styles.modal, { [styles.opened]: opened })}>
@@ -32,8 +36,13 @@ export default function Modal({
         />
       </div>
       {filteredData.map((data) => (
-        <div key={data} onClick={onClickCell} role="button">
-          {data}
+        <div
+          key={data.name}
+          onClick={onClickCell}
+          role="button"
+          className={styles.item}
+        >
+          {data.name}
         </div>
       ))}
     </div>
