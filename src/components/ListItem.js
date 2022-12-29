@@ -3,9 +3,6 @@ import ListItemLayout from "./ListItemLayout"
 import Badge from "./Badge"
 import styles from "./ListItem.module.css"
 
-const relativeTime = require("dayjs/plugin/relativeTime")
-dayjs.extend(relativeTime)
-
 export default function ListItem({ onClickTitle, data, checked, onClickCheckBox }) {
   const badges = data.labels
   const state = data.state === "open" ? "opened" : "closed"

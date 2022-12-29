@@ -1,17 +1,19 @@
-import styles from "./App.module.css"
-import Header from "./Header"
-import Footer from "./Footer"
-import ListContainer from "./ListContainer"
+import { Route, Routes } from "react-router-dom"
+
+import Issue from './pages/Issue'
 
 function App() {
   return (
-    <>
-      <div className={styles.nav}>Nav</div>
-      <Header />
-      <ListContainer />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Issue/>} />
+      <Route path="/example" element={<Example/>} />
+    </Routes>
   )
 }
 
 export default App
+
+
+function Example() {
+  return <div>example</div>
+}
