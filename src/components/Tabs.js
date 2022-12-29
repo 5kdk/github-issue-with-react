@@ -13,8 +13,7 @@ const tabList = [
 ]
 
 export default function Tabs() {
-
-  const {pathname} = useLocation();
+  const { pathname } = useLocation()
 
   return (
     <ul className={styles.tabList}>
@@ -22,7 +21,7 @@ export default function Tabs() {
         <Tab
           key={`${idx}`}
           item={tab}
-          selected={pathname === tab.pathname}
+          selected={(pathname === "/" ? "/issue" : pathname) === tab.pathname}
         />
       ))}
     </ul>
@@ -32,14 +31,12 @@ export default function Tabs() {
 function Tab({ item, selected, number }) {
   return (
     <li>
-      <Link to={item.pathname } className={styles.link}>
-      <button
-        className={cx(styles.tab, { [styles.selected]: selected })}
-      >
-        <span>{item.name}</span>
-        {number && <div className={styles.circle}>{number}</div>}
+      <Link to={item.pathname} className={styles.link}>
+        <button className={cx(styles.tab, { [styles.selected]: selected })}>
+          <span>{item.name}</span>
+          {number && <div className={styles.circle}>{number}</div>}
         </button>
-        </Link>
+      </Link>
     </li>
   )
 }
