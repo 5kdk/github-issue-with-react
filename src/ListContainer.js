@@ -16,12 +16,12 @@ export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
   const [list, setList] = useState([])
   const [checked, setChecked] = useState(false)
-  const [isOpenMode, setIsOpenMode] = useState(true)
   const [params, setParams] = useState()
   const maxPage = 10
 
   const [searchParams, setSearchParams] = useSearchParams()
   const page = parseInt(searchParams.get("page"), 10)
+  const mode = searchParams.get("mode")
 
   async function getData(params) {
     const data = await axios.get(`${GITHUB_API}/repos/facebook/react/issues`, {
@@ -31,8 +31,8 @@ export default function ListContainer() {
   }
 
   useEffect(() => {
-    getData({ page, state: isOpenMode ? "open" : "closed", ...params })
-  }, [page, isOpenMode, params])
+    getData({ page, state: mode, ...params })
+  }, [page, mode, params])
 
   return (
     <>
@@ -53,10 +53,7 @@ export default function ListContainer() {
             New Issue
           </Button>
         </div>
-        <OpenClosedFilters
-          isOpenMode={isOpenMode}
-          OnClickMode={setIsOpenMode}
-        />
+        <OpenClosedFilters isOpenMode={mode !=='closed'} OnClickMode={(mode) => setSearchParams({ mode })} />
         <ListItemLayout className={styles.listFilter}>
           <ListFilter
             onChangeFilter={(params) => {
@@ -101,13 +98,13 @@ function OpenClosedFilters({ isOpenMode, OnClickMode }) {
         // size={openModeDataSize}
         state="Opened"
         selected={isOpenMode}
-        onClick={() => OnClickMode(true)}
+        onClick={() => OnClickMode('open')}
       />
       <OpenClosedFilter
         // size={closeModeDataSize}
         state="Closed"
         selected={!isOpenMode}
-        onClick={() => OnClickMode(false)}
+        onClick={() => OnClickMode('closed')}
       />
     </>
   )
