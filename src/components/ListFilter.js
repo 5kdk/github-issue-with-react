@@ -24,17 +24,17 @@ export default function ListFilter({ onChangeFilter }) {
 
     let result = []
     switch (apiPath) {
-      case "assignes":
+      case "assignees":
         result = data.data.map((d) => ({
           name: d.login,
         }))
         break
-      case "milestone":
+      case "milestones":
         result = data.data.map((d) => ({
           name: d.title,
         }))
         break
-      case "label":
+      case "labels":
       default:
         result = data.data
     }
