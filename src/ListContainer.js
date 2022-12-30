@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, Link } from "react-router-dom"
 import axios from "axios"
 import cx from "clsx"
 
@@ -42,15 +42,17 @@ export default function ListContainer() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           ></input>
-          <Button
-            style={{
-              fontSize: "14px",
-              backgroundColor: "#347d39",
-              color: "white",
-            }}
-          >
-            New Issue
-          </Button>
+          <Link to="/new" className={styles.link}>
+            <Button
+              style={{
+                fontSize: "14px",
+                backgroundColor: "#347d39",
+                color: "white",
+              }}
+            >
+              New Issue
+            </Button>
+          </Link>
         </div>
         <OpenClosedFilters
           isOpenMode={state !== "closed"}
@@ -100,13 +102,13 @@ function OpenClosedFilters({ isOpenMode, OnClickMode }) {
         // size={openModeDataSize}
         state="Opened"
         selected={isOpenMode}
-        onClick={() => OnClickMode('open')}
+        onClick={() => OnClickMode("open")}
       />
       <OpenClosedFilter
         // size={closeModeDataSize}
         state="Closed"
         selected={!isOpenMode}
-        onClick={() => OnClickMode('closed')}
+        onClick={() => OnClickMode("closed")}
       />
     </>
   )
