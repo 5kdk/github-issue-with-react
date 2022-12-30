@@ -30,7 +30,7 @@ export function useForm({
       const key = errorKeys[0]
       alert(validateResult[key])
       onErrors()
-      // refs[key].current.focus()
+      refs[key].current.focus()
       setIsSubitting(false)
       return
     }
