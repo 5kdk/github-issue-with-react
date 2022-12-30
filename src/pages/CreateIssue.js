@@ -1,10 +1,12 @@
-import { useState, useRef } from "react"
+import { useRef } from "react"
 import cx from "clsx"
+import axios from "axios"
 
 import Button from "../components/Button"
 import styles from "./CreateIssue.module.css"
 import TextField from "../components/TextField"
 import { useForm } from "../hooks"
+import { GITHUB_API } from "../api"
 
 export default function CreateIssue() {
   const inputRef = useRef()
@@ -12,9 +14,23 @@ export default function CreateIssue() {
   const { isSubmitting, inputValues, onChange, errors, handleSubmit } = useForm(
     {
       initialValues: { title: "", body: "" },
-      onSubit: () => console.log("완료"),
+      onSubmit: async () =>
+        await axios.post(
+          `${GITHUB_API}/repos/5kdk/github-issue-with-react/issues`,
+          inputValues,
+          {
+            headers: {
+              Authorization: process.env.REACT_APP_GITHUB_TOKEN,
+              "Content-Type":"applications/json",
+            },
+          },
+        ),
       validate,
+      onErrors: () => console.log("error"),
       refs: { title: inputRef, body: textareaRef },
+      onSuccess: (result) => {
+        console.log({result})
+      }
     },
   )
 
