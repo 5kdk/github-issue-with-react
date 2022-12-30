@@ -48,7 +48,7 @@ export default function CreateIssue() {
             error={errors.title}
           />
           <TextField
-            ret={textareaRef}
+            ref={textareaRef}
             type="textarea"
             name="body"
             placeholder="Leave a comment"
